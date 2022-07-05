@@ -1,0 +1,3 @@
+#!/bin/bash
+## Run n98-magerun2 commands
+bin/cli n98-magerun2 "$@"

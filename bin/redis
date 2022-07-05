@@ -1,0 +1,4 @@
+#!/bin/bash
+## Run redis commands
+[ -z "$1" ] && echo "Please specify a CLI command" && exit
+bin/docker-compose exec redis sh -c "redis-cli $@"

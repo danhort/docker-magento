@@ -1,0 +1,3 @@
+#!/bin/bash
+## Run Magento commands
+bin/cli bin/magento "$@"

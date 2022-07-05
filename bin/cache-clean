@@ -1,0 +1,3 @@
+#!/bin/bash
+## https://github.com/mage2tv/magento-cache-clean
+bin/cli /var/www/.composer-global/vendor/bin/cache-clean.js "$@"

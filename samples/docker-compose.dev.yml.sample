@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  app:
+    volumes: &appvolumes
+      ## Host mounts with performance penalty, only put what is necessary here
+      - ../app/code:/var/www/html/app/code:cached
+      - ../app/design:/var/www/html/app/design:cached
+      - ../app/etc:/var/www/html/app/etc:cached
+      - ../composer.json:/var/www/html/composer.json:cached
+      - ../composer.lock:/var/www/html/composer.lock:cached
+      - ../auth.json:/var/www/html/auth.json:cached
+      - ../patches:/var/www/html/patches:cached
+      - ../var/log:/var/www/html/var/log:cached
+      #- ../var/report:/var/www/html/var/report:cached
+      ## To sync your SSH to the container, uncomment the following line:
+      #- ~/.ssh/id_rsa:/var/www/.ssh/id_rsa:cached
+
+  phpfpm:
+    volumes: *appvolumes
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025"
+      - "8025:8025"
+
+  ## Disabling cron by default as it uses higher CPU, enable if needed
+  #cron:
+  #  volumes: *appvolumes
