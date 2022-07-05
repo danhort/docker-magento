@@ -87,24 +87,6 @@ RUN curl -sS https://getcomposer.org/installer | \
 
 RUN curl https://files.magerun.net/n98-magerun2.phar -o /usr/local/bin/n98-magerun2
 RUN chmod +x /usr/local/bin/n98-magerun2
-
-# Install Oracle Instantclient
-ADD bin/instantclient-basiclite-linux.x64-12.1.0.2.0.zip /opt/oracle/instantclient-basiclite-linux.x64-12.1.0.2.0.zip
-ADD bin/instantclient-sdk-linux.x64-12.1.0.2.0.zip /opt/oracle/instantclient-sdk-linux.x64-12.1.0.2.0.zip
-RUN unzip /opt/oracle/instantclient-basiclite-linux.x64-12.1.0.2.0.zip -d /opt/oracle \
-    && unzip /opt/oracle/instantclient-sdk-linux.x64-12.1.0.2.0.zip -d /opt/oracle \
-    && ln -s /opt/oracle/instantclient_12_1/libclntsh.so.12.1 /opt/oracle/instantclient_12_1/libclntsh.so \
-    && ln -s /opt/oracle/instantclient_12_1/libclntshcore.so.12.1 /opt/oracle/instantclient_12_1/libclntshcore.so \
-    && ln -s /opt/oracle/instantclient_12_1/libocci.so.12.1 /opt/oracle/instantclient_12_1/libocci.so \
-    && rm -rf /opt/oracle/*.zip
-
-ENV LD_LIBRARY_PATH  /opt/oracle/instantclient_12_1:${LD_LIBRARY_PATH}
-
-# Install Oracle extensions
-RUN echo 'instantclient,/opt/oracle/instantclient_12_1/' | pecl install oci8 \
-    && docker-php-ext-enable oci8 \
-    && docker-php-ext-configure pdo_oci --with-pdo-oci=instantclient,/opt/oracle/instantclient_12_1,12.1 \
-    && docker-php-ext-install pdo_oci
     
 COPY conf/php.ini $PHP_INI_DIR
 COPY conf/php-fpm.conf /usr/local/etc/

@@ -6,7 +6,7 @@ params="$@"
 YELLOW='\033[1;33m'
 GREEN='\033[0;32m'
 NC='\033[0m'
-AVIALABLE_PHP_VERSIONS=(7.4 8.1)
+AVIALABLE_PHP_VERSIONS=(7.3 7.4 8.1)
 
 usage () {
     echo -e "

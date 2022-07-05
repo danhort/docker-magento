@@ -9,7 +9,7 @@
 `alias dm=".dm/bin/dm"`  
 3. Clone docker-magento into a `.dm` directory in the Magento root
 `git clone git git@github.com:danhort/docker-magento.git .dm`   
-4. Initialize the environment with available PHP versions (7.4 or 8.1)
+4. Initialize the environment with available PHP versions (7.3 or 7.4 or 8.1)
 `dm --init-sync <PHP version>` or `dm --init <PHP version>`  
 5. Create the new container
 `dm start`
